@@ -9,11 +9,13 @@ int main(int argc, char const *argv[]) {
     struct grade *data;
     FILE *grade_file = fopen("GradeLise.txt", "r");
     char buff[1000];
-    int lines = 0, i = 0, j = 0, sujNum = 0;
+    int lines = 0, i = 0, j = 0, sujNum = 1;
     if(grade_file) {
         fgets(buff, 1000, grade_file);
         for(i = 0; i < 1000; i++) {
-            if(!(buff[i] == 32 || buff[i] == '\n')){
+            if(buff[i] == '\n'){
+                break;
+            }else if(buff[i] != 32) {
                 subjects[sujNum][j] = buff[i];
                 j++;
             }else {
@@ -36,10 +38,10 @@ int main(int argc, char const *argv[]) {
             }
         }
         printf("|%-7s", " Name");
-        for(i = 0; i < sujNum; i++) {
+        for(i = 1; i <= sujNum; i++) {
             printf("| %-7s ", subjects[i]);
         }
-        printf("%-7s|\n", "Stu_Tot.");
+        printf("|%-7s|\n", " Stu_Tot.");
         for(i = 0; i < lines; i++) {
             printf("+-------+---------+---------+---------+---------+---------+---------+\n");
             printf("|%-7s| ", data[i].name);
